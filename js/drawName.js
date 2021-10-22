@@ -2,6 +2,7 @@
  * 辅助类
  * 存储鼠标位置及画的状态
  * @constructor
+ * @param historyLength 历史记录长度
  */
 var DrawMouse = (function () {
     function DrawMouse({historyLength =10}) {
@@ -118,7 +119,7 @@ var Draw = (function () {
         this.bgColor = bgColor
         this.El = El
         this.ctx = null
-        this.drawMouse = new DrawMouse({historyLength: historyLength})
+        this.drawMouse = new DrawMouse({historyLength})
         this.init()
     }
     Draw.prototype.dataUrl = function (mime) {
