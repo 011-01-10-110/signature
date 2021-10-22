@@ -12,11 +12,12 @@
 <body>
     <canvas id="canvas"></canvas>
     <button id="btn">clear</button>
+    <button id="cbtn">clearHistory</button>
     <button id="sbtn">save</button>
     <button id="ubtn">up</button>
     <button id="nbtn">next</button>
 
-    <script src="drawName.js"></script>
+    <script src="js/drawName.js"></script>
     <script>
         const draw = new Draw({width: 300, height: 300, lineW: 10, lineColor: 'rgb(255,0,0)', bgColor: 'rgb(255,255,255)', El: document.getElementById('canvas')})
         const btn = document.getElementById('btn')
@@ -26,16 +27,22 @@
 
         const sbtn = document.getElementById('sbtn')
         sbtn.addEventListener('click', () => {
-            console.log(draw.save())
+            draw.save()
         }, false)
 
         const ubtn = document.getElementById('ubtn')
         ubtn.addEventListener('click', () => {
             console.log(draw.upStep())
         }, false)
+
         const nbtn = document.getElementById('nbtn')
         nbtn.addEventListener('click', () => {
             console.log(draw.nextStep())
+        }, false)
+
+        const cbtn = document.getElementById('cbtn')
+        cbtn.addEventListener('click', () => {
+            draw.clearHistory()
         }, false)
 
      </script>

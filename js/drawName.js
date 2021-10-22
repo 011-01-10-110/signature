@@ -81,14 +81,33 @@ var DrawMouse = (function () {
 
 /**
  * 手写板类
- * @param width 手写板宽度
- * @param height 手写板高度
- * @param lineW 线粗
- * @param lineColor 线颜色
- * @param bgColor 手写板颜色
- * @param El canvas节点Dom元素
- * @param historyLength 历史记录条数
  * @constructor
+ *      @param width 手写板宽度
+ *      @param height 手写板高度
+ *      @param lineW 线粗
+ *      @param lineColor 线颜色
+ *      @param bgColor 手写板颜色
+ *      @param El canvas节点Dom元素
+ *      @param historyLength 历史记录条数
+ * @method dataUrl 获取base64编码
+ *      @param mime 文件类型
+ * @method dataURLtoBlob 获取blob文件
+ *      @param dataUrl base64编码
+ *      @param filename 文件名
+ * @method dataURLtoFile 获取file文件
+ *      @param dataUrl base64编码
+ *      @param filename 文件名
+ * @method downLoadUrl 获取下载地址
+ *      @param dataUrl base64编码
+ *      @param filename 文件名
+ * @method save 保存图片
+ *      @param mime 文件类型
+ *      @param filename 文件名
+ * @method clear 清空canvas区
+ * @method getHistory 获取操作记录
+ * @method upStep 上一步
+ * @method nextStep 下一步
+ * @method clearHistory 清空历史记录
  */
 var Draw = (function () {
     function Draw ({width = 300, height = 300, lineW = 4, lineColor = 'white', bgColor = 'block', El, historyLength=10}) {
@@ -127,9 +146,15 @@ var Draw = (function () {
         const file = this.dataURLtoFile(dataUrl, filename)
         return URL.createObjectURL(file)
     }
-    Draw.prototype.save = function (mime='image/jpeg', filename) {
+    Draw.prototype.save = function (mime='image/jpeg', filename='canvas') {
         const base = this.dataUrl(mime)
-        return this.downLoadUrl(base, filename)
+        const downLoadUrl = this.downLoadUrl(base, filename)
+        let a = document.createElement('a')
+        a.href = downLoadUrl
+        a.download = filename
+        document.body.appendChild(a)
+        a.click()
+        document.body.removeChild(a)
     }
     Draw.prototype.init = function () {
         // 获取canvas
