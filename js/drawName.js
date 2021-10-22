@@ -15,7 +15,7 @@ var DrawMouse = (function () {
         this.historyLength = historyLength
     }
     DrawMouse.prototype.setOld = function (X, Y, on=true) {
-        if (on === true) {
+        if (on) {
             this.cur.push({
                 x: this.oldX,
                 y: this.oldY,
