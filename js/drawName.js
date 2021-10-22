@@ -138,9 +138,7 @@ var Draw = (function () {
     }
     Draw.prototype.dataURLtoFile = function (dataUrl, filename='canvas') {
         const blob = this.dataURLtoBlob(dataUrl, filename)
-        blob.lastModifiedDate = new Date()
-        blob.name = filename
-        return blob
+        return new File([blob], filename, {type: blob.type, lastModified: Date.now()})
     }
     Draw.prototype.downLoadUrl = function (dataUrl, filename='canvas') {
         const file = this.dataURLtoFile(dataUrl, filename)
